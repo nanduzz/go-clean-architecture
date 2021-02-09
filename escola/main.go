@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/nanduzz/go-clean-architecture/escola/aplicacao/aluno/matricular"
-	entidadeAluno "github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
-	"github.com/nanduzz/go-clean-architecture/escola/infra/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/infra/infraaluno"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	numeroCPF := "123.456.789-00"
 	email := "fernando@fernando.com"
 
-	repositorio := aluno.NewRepositorioDeAlunosEmMemoria()
+	repositorio := infraaluno.NewRepositorioDeAlunosEmMemoria()
 	matricularaluno := matricular.NewMatricularAluno(repositorio)
 
 	err := matricularaluno.Executa(matricular.NewMatricularAlunoDTO(nome, numeroCPF, email))
@@ -22,7 +22,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	cpf, err := entidadeAluno.NewCPF(numeroCPF)
+	cpf, err := aluno.NewCPF(numeroCPF)
 	if err != nil {
 		log.Fatal(err)
 	}

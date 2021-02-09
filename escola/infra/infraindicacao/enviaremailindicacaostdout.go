@@ -1,4 +1,4 @@
-package indicacao
+package infraindicacao
 
 import (
 	"log"

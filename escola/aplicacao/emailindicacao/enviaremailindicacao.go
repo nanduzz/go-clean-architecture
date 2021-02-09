@@ -1,4 +1,4 @@
-package indicacao
+package emailindicacao
 
 import "github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
 

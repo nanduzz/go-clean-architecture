@@ -1,4 +1,4 @@
-package aluno
+package infraaluno
 
 import (
 	"crypto/md5"
