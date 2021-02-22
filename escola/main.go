@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/nanduzz/go-clean-architecture/escola/aplicacao/aluno/matricular"
+	"github.com/nanduzz/go-clean-architecture/escola/dominio"
 	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
 	"github.com/nanduzz/go-clean-architecture/escola/infra/infraaluno"
 )
@@ -15,7 +16,11 @@ func main() {
 	email := "fernando@fernando.com"
 
 	repositorio := infraaluno.NewRepositorioDeAlunosEmMemoria()
-	matricularaluno := matricular.NewMatricularAluno(repositorio)
+	publicador := dominio.NewPublicadorEventos()
+
+	publicador.Adicionar(aluno.NewLogDeAlunoMatriculado().AbstractOuvinte)
+
+	matricularaluno := matricular.NewMatricularAluno(repositorio, publicador)
 
 	err := matricularaluno.Executa(matricular.NewMatricularAlunoDTO(nome, numeroCPF, email))
 	if err != nil {
