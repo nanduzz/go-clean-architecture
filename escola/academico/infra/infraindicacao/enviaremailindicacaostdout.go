@@ -3,7 +3,7 @@ package infraindicacao
 import (
 	"log"
 
-	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/dominio/aluno"
 )
 
 type EnviarEmailIndicacaoStdOut struct{}

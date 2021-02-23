@@ -1,5 +1,7 @@
 package aluno
 
+import "github.com/nanduzz/go-clean-architecture/escola/shared/dominio/sharedaluno"
+
 type FabricaDeAluno struct {
 	aluno *Aluno
 }
@@ -11,7 +13,7 @@ func NewFabricaDeAluno() *FabricaDeAluno {
 }
 
 func (f *FabricaDeAluno) ComNomeCPFEMAIL(nome, numeroCPF, enderecoEmail string) (*FabricaDeAluno, error) {
-	cpf, err := NewCPF(numeroCPF)
+	cpf, err := sharedaluno.NewCPF(numeroCPF)
 	if err != nil {
 		return nil, err
 	}

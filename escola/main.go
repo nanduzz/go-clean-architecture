@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/nanduzz/go-clean-architecture/escola/aplicacao/aluno/matricular"
-	"github.com/nanduzz/go-clean-architecture/escola/dominio"
-	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
-	"github.com/nanduzz/go-clean-architecture/escola/infra/infraaluno"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/aplicacao/aluno/matricular"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/infra/infraaluno"
+	"github.com/nanduzz/go-clean-architecture/escola/gamificacao/aplicacao/geraselo"
+	"github.com/nanduzz/go-clean-architecture/escola/gamificacao/infra/infraselo"
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/evento"
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/sharedaluno"
 )
 
 func main() {
@@ -16,9 +19,12 @@ func main() {
 	email := "fernando@fernando.com"
 
 	repositorio := infraaluno.NewRepositorioDeAlunosEmMemoria()
-	publicador := dominio.NewPublicadorEventos()
+	publicador := evento.NewPublicadorEventos()
+
+	repositorioSelos := infraselo.NewRepositorioDeSelosEmMemoria()
 
 	publicador.Adicionar(aluno.NewLogDeAlunoMatriculado().AbstractOuvinte)
+	publicador.Adicionar(geraselo.NewGeraSeloAlunoNovato(repositorioSelos).AbstractOuvinte)
 
 	matricularaluno := matricular.NewMatricularAluno(repositorio, publicador)
 
@@ -27,7 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	cpf, err := aluno.NewCPF(numeroCPF)
+	cpf, err := sharedaluno.NewCPF(numeroCPF)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,16 +1,16 @@
 package matricular
 
 import (
-	"github.com/nanduzz/go-clean-architecture/escola/dominio"
-	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/evento"
 )
 
 type MatricularAluno struct {
 	repositorio aluno.RepositorioDeAlunos
-	publicador  *dominio.PublicadorEventos
+	publicador  *evento.PublicadorEventos
 }
 
-func NewMatricularAluno(repositorio aluno.RepositorioDeAlunos, publicador *dominio.PublicadorEventos) *MatricularAluno {
+func NewMatricularAluno(repositorio aluno.RepositorioDeAlunos, publicador *evento.PublicadorEventos) *MatricularAluno {
 	return &MatricularAluno{
 		repositorio: repositorio,
 		publicador:  publicador,

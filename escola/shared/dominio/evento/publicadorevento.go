@@ -1,4 +1,4 @@
-package dominio
+package evento
 
 type PublicadorEventos struct {
 	ouvintes []AbstractOuvinte

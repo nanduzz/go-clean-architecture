@@ -1,4 +1,4 @@
-package dominio
+package evento
 
 import "log"
 

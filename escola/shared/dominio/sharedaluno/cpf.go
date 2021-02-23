@@ -1,4 +1,4 @@
-package aluno
+package sharedaluno
 
 import (
 	"errors"

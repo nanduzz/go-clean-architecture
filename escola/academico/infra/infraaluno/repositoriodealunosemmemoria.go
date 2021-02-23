@@ -3,16 +3,17 @@ package infraaluno
 import (
 	"fmt"
 
-	"github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/academico/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/sharedaluno"
 )
 
 type RepositorioDeAlunosEmMemoria struct {
-	store map[aluno.CPF]*aluno.Aluno
+	store map[sharedaluno.CPF]*aluno.Aluno
 }
 
 func NewRepositorioDeAlunosEmMemoria() *RepositorioDeAlunosEmMemoria {
 	return &RepositorioDeAlunosEmMemoria{
-		store: make(map[aluno.CPF]*aluno.Aluno),
+		store: make(map[sharedaluno.CPF]*aluno.Aluno),
 	}
 }
 
@@ -21,7 +22,7 @@ func (r *RepositorioDeAlunosEmMemoria) Matricular(aluno *aluno.Aluno) error {
 	return nil
 }
 
-func (r *RepositorioDeAlunosEmMemoria) BuscaPorCPF(cpf aluno.CPF) (*aluno.Aluno, error) {
+func (r *RepositorioDeAlunosEmMemoria) BuscaPorCPF(cpf sharedaluno.CPF) (*aluno.Aluno, error) {
 	aluno, ok := r.store[cpf]
 	if !ok {
 		return nil, fmt.Errorf("Aluno não encontrado! cpf :", cpf.GetNumero())

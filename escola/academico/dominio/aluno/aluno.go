@@ -1,12 +1,16 @@
 package aluno
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/sharedaluno"
+)
 
 var ErrMaxTelefones = errors.New("Número maximo de telefones já atingido!")
 
 //AGGREGATE ROOT
 type Aluno struct {
-	cpf       *CPF
+	cpf       *sharedaluno.CPF
 	nome      string
 	email     *Email
 	telefones []*Telefone
@@ -26,7 +30,7 @@ func (a *Aluno) AdicionarTelefone(ddd, numero string) error {
 	return nil
 }
 
-func NewAluno(nome string, cpf *CPF, email *Email) *Aluno {
+func NewAluno(nome string, cpf *sharedaluno.CPF, email *Email) *Aluno {
 	return &Aluno{
 		nome:  nome,
 		email: email,
@@ -34,6 +38,6 @@ func NewAluno(nome string, cpf *CPF, email *Email) *Aluno {
 	}
 }
 
-func (a *Aluno) GetCpf() *CPF {
+func (a *Aluno) GetCpf() *sharedaluno.CPF {
 	return a.cpf
 }

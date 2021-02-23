@@ -1,6 +1,9 @@
 package matricular
 
-import "github.com/nanduzz/go-clean-architecture/escola/dominio/aluno"
+import (
+	"github.com/nanduzz/go-clean-architecture/escola/academico/dominio/aluno"
+	"github.com/nanduzz/go-clean-architecture/escola/shared/dominio/sharedaluno"
+)
 
 type MatricularAlunoDTO struct {
 	nomeAluno  string
@@ -17,7 +20,7 @@ func NewMatricularAlunoDTO(nome, cpf, email string) *MatricularAlunoDTO {
 }
 
 func (m *MatricularAlunoDTO) criarAluno() (*aluno.Aluno, error) {
-	cpf, err := aluno.NewCPF(m.cpfAluno)
+	cpf, err := sharedaluno.NewCPF(m.cpfAluno)
 	if err != nil {
 		return nil, err
 	}
